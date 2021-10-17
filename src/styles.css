@@ -1,0 +1,111 @@
+.weather-app {
+  border: 1px solid grey;
+  max-width: 600px;
+  align-self: center;
+  margin: 15px auto;
+  padding: 20px;
+  background: #142d4c;
+  border-radius: 10px;
+  padding-left: 35px;
+}
+
+.form-check {
+  color: #ececec;
+  font-size: 15px;
+}
+
+a {
+  text-decoration: none;
+}
+.celsius,
+.fahrenheit {
+  color: #ececec;
+  font-size: 20px;
+  text-align: right;
+  text-decoration: none;
+}
+
+.celsius:hover,
+.fahrenheit:hover {
+  color: #385170;
+  text-decoration: overline;
+}
+
+h1,
+h2,
+small {
+  color: #ececec;
+  font-family: "Montserrat", sans-serif;
+}
+
+h1 {
+  margin-top: 30px;
+}
+
+h2 {
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+
+h3 {
+  font-family: "Montserrat", sans-serif;
+  color: #ececec;
+  font-size: 20px;
+}
+
+.forecast-main {
+  padding: 10px;
+}
+
+.main-icon {
+  color: #ececec;
+  margin-top: 30px;
+  font-size: 90px;
+  text-align: center;
+}
+
+.current-conditions {
+  color: #ececec;
+  margin-top: 30px;
+  text-align: right;
+  font-size: 35px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.forecast-day {
+  color: #ececec;
+  font-size: 20px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.forecast-week {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.weekly-background:hover {
+  background: #385170;
+  border-radius: 3px;
+}
+
+.icon {
+  color: #ececec;
+  font-size: 40px;
+  text-align: center;
+}
+
+.low {
+  color: #9fd3c7;
+  font-size: 20px;
+}
+
+.footer {
+  color: #ececec;
+  margin-top: 25px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 15px;
+}
+
+.mj {
+  font-family: "WindSong", cursive;
+}
