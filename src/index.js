@@ -67,6 +67,9 @@ function displaySearchedCity(response) {
     "#current-weather-description"
   ).innerHTML = `${currentConditions}`;
   document.querySelector("h2").innerHTML = `${currentCountry}`;
+  document.querySelector(
+    "title"
+  ).innerHTML = `Weather (${currentCity}, ${currentCountry})`;
   document.querySelector("h3").innerHTML = `Last updated: ${lastUpdated}`;
   currentIcon.setAttribute(
     "src",
@@ -121,6 +124,9 @@ function displayCurrentCity(response) {
     "#current-weather-description"
   ).innerHTML = `${currentConditions}`;
   document.querySelector("h2").innerHTML = `${currentCountry}`;
+  document.querySelector(
+    "title"
+  ).innerHTML = `Weather (${currentCity}, ${currentCountry})`;
 }
 
 function getCurrentLocation(position) {
