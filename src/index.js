@@ -1,28 +1,42 @@
+/*
 // current date/time
 let now = new Date();
 let h3 = document.querySelector("h3");
 let hour = now.getHours();
-if (hour < 9) {
-  hour = `0${hour}`;
-}
-let minutes = now.getMinutes();
-if (minutes < 10) {
-  minutes = `0${minutes}`;
-}
 
-let days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
+let minutes = now.getMinutes();
+
+
+
 
 let day = days[now.getDay()];
 
 h3.innerHTML = `${day}, ${hour}:${minutes}`;
+*/
+
+function formatDate(timestamp) {
+  let date = new Date(timestamp);
+  let hours = date.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  let minutes = date.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  let day = days[date.getDay()];
+
+  return `${day}, ${hours}:${minutes}`;
+}
 
 function search(city) {
   let units = "metric";
@@ -40,6 +54,7 @@ function displaySearchedCity(response) {
   let currentWind = Math.round(response.data.wind.speed);
   let currentConditions = response.data.weather[0].main;
   let currentCountry = response.data.sys.country;
+  let lastUpdated = formatDate(response.data.dt * 1000);
   document.querySelector("h1").innerHTML = `${currentCity}`;
   document.querySelector("#temperature").innerHTML = `${currentTemperature}°`;
   document.querySelector("#low").innerHTML = `${currentLow}°`;
@@ -51,9 +66,7 @@ function displaySearchedCity(response) {
     "#current-weather-description"
   ).innerHTML = `${currentConditions}`;
   document.querySelector("h2").innerHTML = `${currentCountry}`;
-  document.querySelector(
-    "title"
-  ).innerHTML = `Weather (${currentCity}, ${currentCountry})`;
+  document.querySelector("h3").innerHTML = `Last updated: ${lastUpdated}`;
 }
 
 function handleSubmit(event) {
@@ -102,9 +115,6 @@ function displayCurrentCity(response) {
     "#current-weather-description"
   ).innerHTML = `${currentConditions}`;
   document.querySelector("h2").innerHTML = `${currentCountry}`;
-  document.querySelector(
-    "title"
-  ).innerHTML = `Weather (${currentCity}, ${currentCountry})`;
 }
 
 function getCurrentLocation(position) {
