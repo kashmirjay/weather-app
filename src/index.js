@@ -52,9 +52,10 @@ function displaySearchedCity(response) {
   let currentCity = response.data.name;
   let currentHumidity = response.data.main.humidity;
   let currentWind = Math.round(response.data.wind.speed);
-  let currentConditions = response.data.weather[0].main;
+  let currentConditions = response.data.weather[0].description;
   let currentCountry = response.data.sys.country;
   let lastUpdated = formatDate(response.data.dt * 1000);
+  let currentIcon = document.querySelector("#current-icon");
   document.querySelector("h1").innerHTML = `${currentCity}`;
   document.querySelector("#temperature").innerHTML = `${currentTemperature}°`;
   document.querySelector("#low").innerHTML = `${currentLow}°`;
@@ -67,6 +68,11 @@ function displaySearchedCity(response) {
   ).innerHTML = `${currentConditions}`;
   document.querySelector("h2").innerHTML = `${currentCountry}`;
   document.querySelector("h3").innerHTML = `Last updated: ${lastUpdated}`;
+  currentIcon.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  currentIcon.setAttribute("alt", response.data.weather[0].description);
 }
 
 function handleSubmit(event) {
