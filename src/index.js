@@ -55,9 +55,12 @@ function displaySearchedCity(response) {
   let currentConditions = response.data.weather[0].description;
   let currentCountry = response.data.sys.country;
   let lastUpdated = formatDate(response.data.dt * 1000);
+
+  celsiusTemperature = response.data.main.temp;
+
   let currentIcon = document.querySelector("#current-icon");
   document.querySelector("h1").innerHTML = `${currentCity}`;
-  document.querySelector("#temperature").innerHTML = `${currentTemperature}°`;
+  document.querySelector("#temperature").innerHTML = `${currentTemperature}`;
   document.querySelector("#low").innerHTML = `${currentLow}°`;
   document.querySelector(
     "#humidity"
@@ -87,24 +90,7 @@ function handleSubmit(event) {
 let form = document.querySelector("#city-search");
 form.addEventListener("submit", handleSubmit);
 
-/*
-//temperature preference
-
-function temperatureCelsius() {
-  let currentTemperature = document.querySelector("#temperature");
-  currentTemperature.innerHTML = "18°";
-}
-function temperatureFahrenheit() {
-  let currentTemperature = document.querySelector("#temperature");
-  currentTemperature.innerHTML = "64°";
-}
-let changeToCelsius = document.querySelector("#celsius");
-changeToCelsius.addEventListener("click", temperatureCelsius);
-
-let changeToFahrenheit = document.querySelector("#fahrenheit");
-changeToFahrenheit.addEventListener("click", temperatureFahrenheit);
-*/
-
+//current city
 function displayCurrentCity(response) {
   let currentTemperature = Math.round(response.data.main.temp);
   let currentLow = Math.round(response.data.main.temp_min);
@@ -113,8 +99,11 @@ function displayCurrentCity(response) {
   let currentWind = Math.round(response.data.wind.speed);
   let currentConditions = response.data.weather[0].main;
   let currentCountry = response.data.sys.country;
+
+  celsiusTemperature = response.data.main.temp;
+
   document.querySelector("h1").innerHTML = `${currentCity}`;
-  document.querySelector("#temperature").innerHTML = `${currentTemperature}°`;
+  document.querySelector("#temperature").innerHTML = `${currentTemperature}`;
   document.querySelector("#low").innerHTML = `${currentLow}°`;
   document.querySelector(
     "#humidity"
@@ -145,5 +134,25 @@ function getPosition(event) {
 
 let getCurrentCity = document.querySelector("#get-current-city");
 getCurrentCity.addEventListener("click", getPosition);
+
+//temperature preference
+function temperatureToCelsius(event) {
+  event.preventDefault();
+  let currentTemperature = document.querySelector("#temperature");
+  currentTemperature.innerHTML = Math.round(celsiusTemperature);
+}
+function temperatureToFahrenheit(event) {
+  event.preventDefault();
+  let fahrenheitTemperature = Math.round((celsiusTemperature * 9) / 5) + 32;
+  let fahrenheitElement = document.querySelector("#temperature");
+  fahrenheitElement.innerHTML = fahrenheitTemperature;
+}
+let changeToCelsius = document.querySelector("#celsius");
+changeToCelsius.addEventListener("click", temperatureToCelsius);
+
+let changeToFahrenheit = document.querySelector("#fahrenheit");
+changeToFahrenheit.addEventListener("click", temperatureToFahrenheit);
+
+let celsiusTemperature = null;
 
 search("Toronto");
