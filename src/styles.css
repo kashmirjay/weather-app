@@ -14,22 +14,31 @@
   font-size: 15px;
 }
 
+.active {
+  text-decoration: none;
+  color: black;
+  cursor: default;
+}
+
+.active:hover {
+  text-decoration: none;
+  color: black;
+}
+
 a {
   text-decoration: none;
   color: #9fd3c7;
 }
 
-.celsius,
-.fahrenheit {
+.units {
   font-size: 20px;
   text-align: right;
   text-decoration: none;
+  color: #ececec;
 }
 
-.celsius:hover,
-.fahrenheit:hover {
-  color: #385170;
-  text-decoration: overline;
+.units:hover {
+  text-decoration: none;
 }
 
 h1,

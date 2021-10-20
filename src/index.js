@@ -138,11 +138,15 @@ getCurrentCity.addEventListener("click", getPosition);
 //temperature preference
 function temperatureToCelsius(event) {
   event.preventDefault();
+  celsius.classList.add("active");
+  fahrenheit.classList.remove("active");
   let currentTemperature = document.querySelector("#temperature");
   currentTemperature.innerHTML = Math.round(celsiusTemperature);
 }
 function temperatureToFahrenheit(event) {
   event.preventDefault();
+  celsius.classList.remove("active");
+  fahrenheit.classList.add("active");
   let fahrenheitTemperature = Math.round((celsiusTemperature * 9) / 5) + 32;
   let fahrenheitElement = document.querySelector("#temperature");
   fahrenheitElement.innerHTML = fahrenheitTemperature;
