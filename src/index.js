@@ -45,6 +45,34 @@ function search(city) {
   axios.get(apiUrl).then(displaySearchedCity);
 }
 
+// weekly forecast
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+
+  let forecastHTML = "";
+  let days = ["Fri", "Sat", "Sun", "Mon"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
+  <div class="col-2">
+  <div class="weekly-background">
+  <span class="forecast-day">
+    ${day}
+    <br />
+    <i class="fas fa-cloud-sun icon"></i>
+    <br />
+    21°
+  </span>
+  <br />
+  <span class="low"> 10° </span>
+</div>
+</div>`;
+  });
+
+  forecastElement.innerHTML = forecastHTML;
+}
+
 // city search
 function displaySearchedCity(response) {
   let currentTemperature = Math.round(response.data.main.temp);
@@ -158,5 +186,7 @@ let changeToFahrenheit = document.querySelector("#fahrenheit");
 changeToFahrenheit.addEventListener("click", temperatureToFahrenheit);
 
 let celsiusTemperature = null;
+
+displayForecast();
 
 search("Toronto");
