@@ -45,32 +45,52 @@ function search(city) {
   axios.get(apiUrl).then(displaySearchedCity);
 }
 
+function formatForecastDate(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  return days[day];
+}
+
 // weekly forecast
-function displayForecast() {
+function displayForecast(response) {
+  let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
 
   let forecastHTML = "";
-  let days = ["Fri", "Sat", "Sun", "Mon"];
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `
   <div class="col-2">
   <div class="weekly-background">
   <span class="forecast-day">
-    ${day}
+    ${formatForecastDate(forecastDay.dt)}
     <br />
-    <i class="fas fa-cloud-sun icon"></i>
+    <img src="http://openweathermap.org/img/wn/${
+      forecastDay.weather[0].icon
+    }@2x.png"
+    width="65";
     <br />
-    21°
+    ${Math.round(forecastDay.temp.max)}°
   </span>
   <br />
-  <span class="low"> 10° </span>
+  <span class="low"> ${Math.round(forecastDay.temp.min)} </span>
 </div>
 </div>`;
+    }
   });
 
   forecastElement.innerHTML = forecastHTML;
+}
+
+function getForecast(coordinates) {
+  console.log(coordinates);
+  let apiKey = `7d478f69e1b2f5d563653f13f5f91d76`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&units=metric&appid=${apiKey}`;
+  axios.get(apiUrl).then(displayForecast);
 }
 
 // city search
@@ -107,6 +127,8 @@ function displaySearchedCity(response) {
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   currentIcon.setAttribute("alt", response.data.weather[0].description);
+
+  getForecast(response.data.coord);
 }
 
 function handleSubmit(event) {
@@ -144,6 +166,8 @@ function displayCurrentCity(response) {
   document.querySelector(
     "title"
   ).innerHTML = `Weather (${currentCity}, ${currentCountry})`;
+
+  getForecast(response.data.coord);
 }
 
 function getCurrentLocation(position) {
@@ -186,7 +210,5 @@ let changeToFahrenheit = document.querySelector("#fahrenheit");
 changeToFahrenheit.addEventListener("click", temperatureToFahrenheit);
 
 let celsiusTemperature = null;
-
-displayForecast();
 
 search("Toronto");
