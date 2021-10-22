@@ -14,31 +14,16 @@
   font-size: 15px;
 }
 
-.active {
-  text-decoration: none;
-  color: black;
-  cursor: default;
-}
-
-.active:hover {
-  text-decoration: none;
-  color: black;
-}
-
 a {
   text-decoration: none;
   color: #9fd3c7;
 }
 
 .units {
-  font-size: 20px;
+  font-size: 30px;
   text-align: right;
   text-decoration: none;
   color: #ececec;
-}
-
-.units:hover {
-  text-decoration: none;
 }
 
 h1,
@@ -76,10 +61,11 @@ h3 {
 
 .current-conditions {
   color: #ececec;
-  margin-top: 30px;
+  margin-top: 70px;
   text-align: right;
   font-size: 35px;
   font-family: "Montserrat", sans-serif;
+  max-width: 590px;
 }
 
 .forecast-day {
